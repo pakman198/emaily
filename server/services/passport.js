@@ -14,26 +14,20 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use( new FacebookStrategy({
-  clientID: process.env.FACEBOOK_APP_ID,
-  clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "/auth/facebook/callback"
-}, 
-(accessToken, refreshToken, profile, done) => {
-  console.log({ accessToken, refreshToken, profile });
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: "/auth/facebook/callback"
+  }, 
+  async (accessToken, refreshToken, profile, done) => {
+    console.log({ accessToken, refreshToken, profile });
 
-  User.findOne({ facebookId: profile.id })
-  .then(result => {
-    if(result) {
-      // console.log('User find', { result })
-      done(null, result);
-    } else {
-      User.create({ facebookId: profile.id })
-      .then(result => {
-        // console.log('User create', {result})
-        done(null, result);
-      }).catch(err => {
-        console.log({ err })
-      });
-    }
-  });
-}));
+    const existingUser = await User.findOne({ facebookId: profile.id })
+    if(existingUser) {
+      return done(null, existingUser);
+    } 
+    
+    const newUser = await User.create({ facebookId: profile.id })
+    done(null, result);
+    
+  }
+));
