@@ -4,9 +4,9 @@ const Header = () => {
   return (
     <nav>
     <div className="nav-wrapper">
-      <a href="#" className="brand-logo">Emaily</a>
+      <a href="/" className="brand-logo">Emaily</a>
       <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li><a href="#">Login with Facebook</a></li>
+        <li><a href="/auth/facebook">Login with Facebook</a></li>
       </ul>
     </div>
   </nav>
