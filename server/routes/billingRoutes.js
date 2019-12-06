@@ -1,11 +1,10 @@
 require('dotenv').config({ path: '.env' });
+const authentication = require('../middlewares/authentication');
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 
 module.exports = (app) => {
-  app.post('/api/stripe', async (req, res) => {
-
-    // console.log({ req })
-
+  // here we use the custom authentication middleware to validate that the request has a user
+  app.post('/api/stripe', authentication, async (req, res) => {
     const { body: token, user } = req;
     const charge = await stripe.charges.create({
       amount: 5000,
