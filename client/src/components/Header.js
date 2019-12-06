@@ -23,10 +23,10 @@ const Header = () => {
         return (
           <>
             <li>
-              <a href="/api/logout">Logout</a>
+              <Payments />
             </li>
             <li>
-              <Payments />
+              <a href="/api/logout">Logout</a>
             </li>
           </>
         )
