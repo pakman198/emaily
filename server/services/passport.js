@@ -27,7 +27,6 @@ passport.use( new FacebookStrategy({
     } 
     
     const newUser = await User.create({ facebookId: profile.id })
-    done(null, result);
-    
+    done(null, newUser);
   }
 ));
