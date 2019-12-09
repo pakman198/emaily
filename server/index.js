@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
+const surveyRoutes = require('./routes/surveyRoutes');
 
 mongoose.connect(process.env.MONGO_URI, { 
   useNewUrlParser: true,
@@ -41,6 +42,7 @@ app.use(passport.session());
 
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
 // check lecture 116 & 118. Routing in production and building in production
 // i have 2 separate folders which work as 2 different apps and stephen has the client nested on the server.
