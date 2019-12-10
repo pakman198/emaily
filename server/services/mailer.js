@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env' });
 const SendGrid = require('sendgrid');
 const {
   Email,
@@ -13,7 +14,7 @@ class Mailer extends Mail {
   constructor({ subject, recipients }, content) {
     super();
 
-    this.sgAPI = SendGrid(process.env.SENDGRID_API);
+    this.sgAPI = SendGrid(process.env.SENDGRID_KEY);
     this.from_email = new Email('no-reply@emaily.com', 'Emaily');
     this.subject = subject;
     this.body = new Content('text/html', content);
@@ -49,9 +50,14 @@ class Mailer extends Mail {
       path: '/v3/mail/send',
       body: this.toJSON()
     });
-    const response = await this.sgAPI.API(request);
 
-    return response;
+    try {
+      const response = await this.sgAPI.API(request);
+      return response;
+
+    } catch(err) {
+      console.log({ err });
+    }
   }
 
 }

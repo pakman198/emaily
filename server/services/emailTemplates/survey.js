@@ -1,5 +1,20 @@
+require('dotenv').config({ path: '.env' });
 module.exports = (survey) => {
   return `
-    <div>${survey.body}</div>
+  <html>
+    <body>
+      <div style="text-align: center">
+        <h3>We want to hear you!</h3>
+        <p>Please answer the following question:</p>
+        <p>${survey.body}</p>
+        <div>
+          <a href="${process.env.REDIRECT_DOMAIN}/api/survesy/thanks">Yes</a>
+        </div>
+        <div>
+          <a href="${process.env.REDIRECT_DOMAIN}/api/survesy/thanks">No</a>
+        </div>
+      </div>
+    </body>
+  </html>
   `;
 }
