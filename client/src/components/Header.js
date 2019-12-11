@@ -7,8 +7,6 @@ const Header = () => {
   // this hook is like the mapStateToProps param on the connect
   const auth = useSelector(state => state.auth);
 
-  console.log({ auth })
-
   const renderContent = (auth) => {
     switch(auth) {
       case null:
@@ -37,7 +35,7 @@ const Header = () => {
   }
 
   return (
-    <nav>
+    <nav className="indigo darken-1">
       <div className="nav-wrapper">
         <Link 
           to={ auth ? '/surveys' : '/' } 
