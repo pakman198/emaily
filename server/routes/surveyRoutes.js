@@ -44,6 +44,7 @@ module.exports = app => {
     const p = new Path('/api/surveys/:surveyID/:choice');
     const events = _.chain(req.body)
       .map(event => {
+        if(!event.hasOwnProperty('url')) return
         const match = p.test(new URL(event.url).pathname);
 
         if(match) {

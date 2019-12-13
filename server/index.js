@@ -44,6 +44,11 @@ authRoutes(app);
 billingRoutes(app);
 surveyRoutes(app);
 
+app.get('/', (req, res) => {
+  console.log(process.env)
+  res.send('HELLO WORLD')
+});
+
 // check lecture 116 & 118. Routing in production and building in production
 // i have 2 separate folders which work as 2 different apps and stephen has the client nested on the server.
 // i would need to create a default route that redirects to the client home. Stephen doesn't redirect
