@@ -11,6 +11,20 @@ const surveyTemplate = require('../services/emailTemplates/survey');
 const Survey = mongoose.model('Survey')
 
 module.exports = app => {
+  app.get('/api/surveys', authentication, async (req, res) => {
+    const { user } = req;
+
+    try {
+      const surveys = await Survey
+        .find({ _user: user.id })
+        .select({ recipients: false });
+
+      res.send(surveys)
+    }catch(err) {
+      console.log({ err });
+    }
+  });
+
   app.post('/api/surveys', authentication, validateCredits, async (req, res) => {
     const { title, body, subject, recipients } = req.body;
     const survey = new Survey({
