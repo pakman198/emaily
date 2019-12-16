@@ -9,6 +9,15 @@ With ReduxForm you have the form data at a global level, and there's no need of 
 
 For UI, I used [Materialize](https://materializecss.com/) which is a CSS framework based on Material Design.
 
+## Available Scripts
+
+### `npm start`
+Inside the `client` folder, after installing all the dependencies (`npm install`), run this command to start the frontend application.
+
+### `npm run dev`
+Inside the `server` folder, after installing all the dependencies (`npm install`), run this command to start the backend application.
+Check the `.env.example` file to generate your own environment variables and make the app work properly.
+
 #### Notes
 
 I had to downgrade from `react-scripts@3.3` to `react-scripts@3.2` because there's an [issue](https://stackoverflow.com/questions/59241291/securityerror-failed-to-construct-websocket-when-i-upload-react-js-applicatio) with websockets, so my deployed app in heroku didn't work, I had to load it via http.
