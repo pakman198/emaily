@@ -7,6 +7,7 @@ module.exports = (app) => {
     passport.authenticate('facebook', { failureRedirect: '/' }),
     function(req, res) {
       // Successful authentication, redirect dashboard.
+      console.log({ res })
       res.redirect('/surveys');
   });
 
