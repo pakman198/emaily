@@ -1,1 +1,25 @@
-<p>survey-list works!</p>
+<div class="survey-list">
+  <div 
+    class="card grey lighten-2"
+    *ngFor="let survey of surveys"
+  >
+    <div class="card-content">
+      <span class="card-title">{{ survey.title }}</span>
+      <p>{{ survey.body }}</p>
+      <p class="right">
+        Sent on: {{ survey.dateSent }}
+      </p>
+    </div>
+    <div class="card-action">
+      <a href="#" class="text-black">Yes: {{ survey.yes }}</a>
+      <a href="#" class="text-black">No: {{ survey.no }}</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="fixed-action-btn">
+  <a routerLink='/surveys/new' class="btn-floating btn-large teal">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
