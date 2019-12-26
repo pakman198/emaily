@@ -1,0 +1,26 @@
+<form [formGroup]="surveyForm" (ngSubmit)="onSubmit($event)">
+  <div class="form-control" *ngFor="let field of formFields; let index = $index">
+    <label for="{{field.name}}">{{ field.label }}</label>
+    <input 
+      type="text"
+      id="{{field.name}}"
+      style="margin-bottom: 5px"
+      [formControlName]="field.name"
+    >
+    
+    <div 
+      *ngIf="surveyForm.controls[field.name].invalid && surveyForm.controls[field.name].touched"
+      class="red-text text-darken-2" 
+      style="margin-bottom: 20px"
+    >
+      {{ surveyForm.controls[field.name].errors.required ? field.errorMsg : null }}
+      {{ surveyForm.controls[field.name].errors?.invalidEmails}}
+    </div>
+  </div>
+
+  <a routerLink="/surveys" class="red darken-2 btn-flat white-text">Cancel</a>
+  <button type="submit" class="teal right btn-flat white-text">
+    Next
+    <i class="material-icons right">done</i>
+  </button>
+</form>
