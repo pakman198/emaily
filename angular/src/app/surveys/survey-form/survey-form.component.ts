@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { validateEmails } from '../validateEmails';
+import { SurveysService } from '../surveys.service';
 
 @Component({
   selector: 'app-survey-form',
@@ -27,11 +28,13 @@ export class SurveyFormComponent {
     ])
   });
 
-  constructor() { }
+  constructor(private surveysService: SurveysService) { }
 
   onSubmit(e: Event) {
     e.preventDefault();
-    console.log(this.surveyForm)
+    const { value } = this.surveyForm;
+
+    this.surveysService.submitSurvey(value);
   }
 
 }
