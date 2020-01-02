@@ -6,19 +6,24 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+
 import { SurveysModule } from './surveys/surveys.module';
+import { PaymentComponent } from './header/payment/payment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
-    HeaderComponent
+    HeaderComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SurveysModule
+    SurveysModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

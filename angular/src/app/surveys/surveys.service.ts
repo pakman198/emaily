@@ -5,14 +5,14 @@ import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { Survey } from './surveys.model';
-import { UserService } from '../user.service';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveysService {
 
-  constructor(private http:HttpClient, private router: Router, private userService: UserService) { }
+  constructor(private http:HttpClient, private router: Router, private authService: AuthService) { }
 
   fetchSurveys(): Observable<Survey[]> {
     console.log('FETCH_SURVEYS');
@@ -30,7 +30,7 @@ export class SurveysService {
 
       // call the currentUser to update the userService.authUser 
       // and update the # of credits on the header
-      this.userService.currentUser();
+      this.authService.currentUser();
       this.router.navigate(['/surveys'])
     });
   }

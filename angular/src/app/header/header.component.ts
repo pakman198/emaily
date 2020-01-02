@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { User } from '../user.model';
+import { AuthService } from '../auth.service';
+
+declare var M: any;
 
 @Component({
   selector: 'app-header',
@@ -14,17 +20,20 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   authUser: User | boolean;
 
-  constructor(private userService: UserService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.headerSubscription = this.userService.authUser.subscribe(user => {
+    this.headerSubscription = this.authService.authUser.subscribe(user => {
       console.log('HEADER', { user })
       this.isLoggedIn = !user ? false : true;
       if(user) this.authUser = user;
-    })
+    });
+
+    M.AutoInit();
   }
 
   ngOnDestroy() {
     this.headerSubscription.unsubscribe();
   }
+  
 }
