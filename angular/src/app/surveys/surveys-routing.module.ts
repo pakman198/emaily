@@ -8,7 +8,7 @@ import { AuthGuard } from '../auth.guard';
 
 const routes: Routes = [{ 
   path: 'surveys',
-  // canActivateChild: [AuthGuard],
+  canActivateChild: [AuthGuard],
   children: [
     { path: '', component: SurveyListComponent },
     { path: 'new', component: SurveyFormComponent}

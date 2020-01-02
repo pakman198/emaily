@@ -25,31 +25,25 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     console.log('CAN_ACTIVATE')
     console.log('isLoggedIn', this.authService.isLoggedIn, {next, state});
 
-    if(state.url === '/') {
-      // TODO check login to continue or redirect to dashboard
-      console.log('URL', state.url)
-    } else {
-      console.log('URL NOT /', state.url)
-    }
-
-    return true
-
-    // // return this.authService.validateLogin();
-    // // return false;
-    // setTimeout(()=> { console.log('isLoggedIn', this.authService.isLoggedIn) }, 3000)
-    // return false;
-
-    // this.authService.getCurrentUser().map(
-    //   user => {
-    //     if( !user ) return true;
-        
-    //     this.router.navigate(['/surveys']);
-    //     return false;
-  
-    //   }
-    // );
+    return this.authService.getCurrentUser().pipe(
+      map(currentUser => {
+        console.log({ currentUser })
+        if(state.url === '/' && this.authService.isLoggedIn) {
+          this.router.navigate(['/surveys']);
+          return false
+          
+        } else if(state.url === '/' && !this.authService.isLoggedIn) {
+          console.log('URL NOT /', state.url)
     
-    
+          return true;
+        } else if(this.authService.isLoggedIn) {
+          return true;
+        } else {
+          this.router.navigate(['/']);
+          return false;
+        }
+      })
+    );
   }
 
   canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Guard {

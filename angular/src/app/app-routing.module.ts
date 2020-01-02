@@ -5,7 +5,11 @@ import { LandingComponent } from './landing/landing.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: LandingComponent }
+  { 
+    path: '', canActivate: [AuthGuard], children:[
+      { path: '', component: LandingComponent }
+    ]
+  }
 ];
 
 @NgModule({
